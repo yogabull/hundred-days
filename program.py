@@ -2,6 +2,7 @@
 from time import sleep
 import sys
 import beverages
+from random import randint
 
 
 def main():
@@ -15,9 +16,10 @@ def main():
 
 def header():
     print()
-    print()
     print('------------------------------------------------------------')
+    print()
     print('              Welcome to the coffee shop')
+    print()
     print('------------------------------------------------------------')
     print()
     print()
@@ -34,7 +36,9 @@ def establish_resources():
 
 def ask_for_order():
     # Asks user for order.
-    print('What do you want to drink: (1)Coffee, (2)Latte, (3)Cappucino')
+    tab = '    '
+    print(
+        f'What do you want to drink: \n {tab}  (1)Coffee\n {tab}  (2)Latte\n {tab}  (3)Cappucino')
     order = input().strip()
     if order == 'report':
         view_report()
@@ -49,6 +53,7 @@ def ask_for_order():
 def view_report():
     print(resources)
     print()
+    sleep(3)
     ask_for_order()
 
 
@@ -60,7 +65,7 @@ def set_drink(order):
         drink = beverages.Latte()
     else:
         drink = beverages.Cappuccino()
-    print(f'You ordered a {drink.name}.\n')
+    print(f'\nYou ordered a {drink.name}.\n')
 
     response = verify_resources(drink)
 
@@ -84,33 +89,61 @@ def verify_resources(drink):
 
 
 def process_money(drink):
-    # Asks for payment.
+    # Asks for payment. Determines if enough has been paid.
     print(f'A {drink.name} costs ${drink.price}.')
-    print('Please deposit coins')
-    payment = 0
-    while payment < drink.price:
-        quarters = int(input('How many quarters will you deposit? '))
-        payment = quarters * .25
-        dimes = int(input('How many dimes will you deposit?'))
-        payment = payment + dimes * .10
-        nickels = int(input('How many dimes will you deposit?'))
-        payment = payment + nickels * .05
+    print('Please deposit coins\n')
+    payment = float()
 
-    verify_transaction(payment)
-    print('here is the money balance')
+    while payment < drink.price:
+        payment = add_coins(payment)
+        if payment < drink.price:
+            print(f"\nThat only makes ${format(payment, '.2f')} ")
+            message = ("You need to add mo money!", "You're too short man!",
+                       "Come on pull out that paper stack.", "Keep it coming shawtee!")
+            print(message[randint(0, 3)])
+            print()
+
+    print(f"\nThat makes ${format(payment, '.2f')}")
+    change = format((payment - drink.price), '.2f')
+    print(f'Here is your change: ${change}')
+    print(f"\nLet's make that {drink.name}.\n")
+    verify_transaction(drink)
+
     anything_else()
 
 
-def verify_transaction(payment):
-    # Verifies if enough was paid and updates report.
-    print('verified')
+def add_coins(payment):
+    sleep(1)
+    tab = '    '
+    quarters = int(input(tab + 'How many quarters will you deposit? '))
+    payment = quarters * .25
+    dimes = int(input(tab + 'How many dimes will you deposit? '))
+    payment = payment + dimes * .10
+    nickels = int(input(tab + 'How many nickels will you deposit?  '))
+    payment = payment + nickels * .05
+    return payment
+
+
+def verify_transaction(drink):
+    resources['Money'] = resources['Money'] + drink.price
+    resources['Milk'] = resources['Milk'] - drink.milk
+    resources['Water'] = resources['Water'] - drink.water
+    resources['Coffee'] = resources['Coffee'] - drink.coffee
     make_drink(drink)
 
 
 def make_drink(drink):
     # Updates report with resources used.
-    print(resources)
-    pass
+    print(f'Enjoy your {drink.name} ')
+    print('Would you like anything else? y/n ')
+    answer = input().lower().strip()
+    if answer == 'report':
+        for key, item in resources.items():
+            print(key, item)
+    elif answer == 'y':
+        anything_else()
+    else:
+        turn_off()
 
 
 def anything_else():
