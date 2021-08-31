@@ -46,13 +46,13 @@ def game_loop():
         display_person(person_B)
         sleep(.2)
 
-        guess = input('\nWho has more followers? A or B  ').lower()
+        guess = str(input('\nWho has more followers? 1 or 2  '))
 
         if person_A['follower_count'] > person_B['follower_count']:
             # outputs who has more followers.
-            answer = 'a'
+            answer = '1'
         else:
-            answer = 'b'
+            answer = '2'
 
         sleep(1)
         if guess != answer:
