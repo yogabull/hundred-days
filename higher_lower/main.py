@@ -3,6 +3,7 @@
 import art
 import game_data
 from random import randint
+from random import choice
 from time import sleep
 
 
@@ -23,10 +24,14 @@ def display_person(person):
     print(padding + person['country'])
 
 
-def get_person():
-    data = game_data.data
-    num = randint(0, len(data) - 1)
-    person = data[num]
+# def get_person():
+#     data = game_data.data
+#     num = randint(0, len(data) - 1)
+#     person = data[num]
+#     return person
+
+def get_person():  # version using random.choice()
+    person = choice(game_data.data)
     return person
 
 
