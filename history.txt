@@ -1,0 +1,16 @@
+ 2231  LL
+ 2232  ls
+ 2233  cd ..
+ 2234  ls
+ 2235  cd ..
+ 2236  ls
+ 2237  . venv/bin/activate
+ 2238  python3 
+ 2239  ls
+ 2240  docker images
+ 2241  docker ps
+ 2242  docker ps -a
+ 2243  cat history > history.txt
+ 2244  echo history > history.txt
+ 2245  ls
+ 2246  less history.txt
