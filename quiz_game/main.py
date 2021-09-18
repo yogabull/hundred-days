@@ -1,17 +1,17 @@
 from question_model import Question
 from data import question_data
-from pprint import pprint
-import random
+from quiz_brain import QuizBrain
+
 
 question_bank = []
-for q in question_data:
-    new_question = Question(q['text'], q['answer'])
+
+# solution from tutorial
+for item in question_data:
+    q_text = item['text']
+    q_answer = item['answer']
+    new_question = Question(q_text, q_answer)
     question_bank.append(new_question)
 
-q_option = random.choice(question_bank)
-
-q_print = (q_option.text)
-q_answer = (q_option.answer)
-
-print(q_print)
-print(q_answer)
+quiz = QuizBrain(question_bank)
+while quiz.still_have_questions():
+    quiz.next_question()
