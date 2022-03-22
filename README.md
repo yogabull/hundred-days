@@ -1,7 +1,12 @@
-# This repo contains exercises from Angela Yu's course, Hundred Days of Code, Python Bootcamp.
+# Python Course
 
+### Description
 
-## __Coffee Machine App__
+This repo contains exercises from Angela Yu's course, _Hundred Days of Code, Python Bootcamp_.
+
+---
+
+### __Coffee Machine App__
 
 _not finished -- moved on to other code_
 
@@ -13,7 +18,7 @@ This app simulates a coffee machine and does this:
 
 ---
 
-## __Password Generator App__
+### __Password Generator App__
 
 _Added 8/15/21_
 
@@ -27,7 +32,7 @@ Generates a randomized password containing:
 
 
 ---
-## __Higher / Lower Game__
+### __Higher / Lower Game__
 
 _Added 8/30/21_
 
@@ -35,7 +40,7 @@ This app prompts the user to guess the higher instagram follower count between t
 
 ---
 
-## Test Table
+### Test Table
 
 This is how a table works in markdown.
 
